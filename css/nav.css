@@ -1,0 +1,158 @@
+.mono {
+    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Overpass Mono', monospace;
+    color:white;
+}
+
+nav.flexX {
+    flex-direction: row;
+    background-color: rgba(46, 47, 54, 0.0);
+    margin-top: 0px;
+    /* justify-content: flex-start; */
+    /* flex-wrap:nowrap; */
+}
+
+nav>a.nav_link {
+    color: white;
+    background-color: rgba(75, 83, 87, 0.329);
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 40px;
+    text-decoration: none;
+    align-self: flex-end;
+}
+
+nav>a.nav_title {
+    color:rgb(107, 255, 255);
+        margin-right: auto;
+}
+
+.bottom{
+    /* overflow: hidden; */
+    word-wrap: unset;
+    position: fixed;
+    bottom: 0;
+    width: 20%;
+}
+
+.bottom > *{
+    float: left;
+    display: block;
+    text-align: center;
+    /* padding: 14px 16px; */
+    text-decoration: none;
+    font-size: 17px;
+}
+
+nav > * {
+    transition: ease all .5s;
+}
+
+@media only screen and (min-width: 3000px) {
+    nav > * {
+        transition: ease all .5s;
+    }
+
+    nav>a.nav_link {
+        font-size: 40px;
+        margin: 50px;
+    }
+    nav>a.nav_title {
+        margin-right: auto;
+    }
+    .bottom{
+        font-size: 25em;
+        margin: 10px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    nav > * {
+        transition: ease all .5s;
+    }
+    nav>a.nav_link {
+        font-size: 14px;
+    }
+    .bottom{
+        font-size: 25em;
+    }
+}
+
+@media only screen and (min-width: 4000px) {
+    nav > * {
+        transition: ease all .5s;
+    }
+    nav>a.nav_link {
+        font-size: 100px;
+    }
+    .bottom{
+        font-size: 25em;
+    }
+} 
+
+@media only screen and (max-width: 2000px) {
+    nav > * {
+        transition: ease all .5s;
+    }
+    nav>a.nav_link {
+        font-size: 30px;
+    }
+    .bottom{
+        font-size: 25em;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    nav > * {
+        transition: ease all .5s;
+    }
+    nav>a.nav_link {
+        font-size: 20px;
+    }
+    .bottom{
+        font-size: 25em;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    nav > * {
+        transition: ease all .5s;
+    }
+    nav>a.nav_link {
+        font-size: 16px;
+    }
+    .bottom{
+        font-size: 25em;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    nav > * {
+        transition: ease all .5s;
+    }
+    nav>a.nav_link {
+        font-size: 10px;
+    }
+    .bottom{
+        font-size: 25em;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    nav > * {
+        transition: ease all .5s;
+    }
+    nav>a.nav_link {
+        font-size: 8px;
+    }
+    .bottom{
+        font-size: 25em;
+    }
+}
+
+

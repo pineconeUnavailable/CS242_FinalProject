@@ -1,0 +1,137 @@
+/*--------------------DISPLAY CLASSES--------------------*/
+
+.growX{
+    width: auto;
+}
+
+.growY{
+    height: 100%;
+}
+
+.flexX{
+    display:flex;
+    flex-direction: row;
+}
+
+.flexY{
+    display:flex;
+    flex-direction: column;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.centerX {
+    justify-content: center;
+    text-align: center;
+}
+
+.centerY {
+    align-items: center;
+}
+
+/*--------------------LINK STYLES--------------------*/
+a.link{
+    text-decoration: none;
+    color:darkcyan;
+    padding-top: 3px;
+}
+
+a.link:visited{
+    text-decoration: none;
+    color:rgb(161, 185, 185);
+}
+
+a.link:hover{
+    text-decoration: none;
+    color:rgb(212, 212, 212);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.137);
+}
+
+/*--------------------GLOBAL ELEMENT STYLING--------------------*/
+
+
+html {
+    background: black;
+}
+
+body {
+    margin: 0px;
+}
+
+aside {
+    width: 20%;
+    padding: 1%;
+    height: auto;
+
+    border-style:groove;
+    background-color: rgba(0, 0, 0, 0.452);
+    padding-bottom: 0%;
+    padding-bottom: 0px;
+}
+
+article{
+    width: 80%;
+}
+
+/*--------------------CLASS BASED STYLING--------------------*/
+
+.text {
+    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Overpass Mono', monospace;
+    color:white;
+}
+
+.hidden-list{
+    list-style: none;
+}
+
+.item {
+    border-style: groove;
+    border-radius: 10px;
+    position:relative;
+    left: -20px;
+    color:aqua;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+
+.item:hover{
+    background-color: rgba(0, 255, 0, 0.13);
+    transition: 0.3s;
+}
+
+button.close{
+    z-index: 1;
+    float:right;
+    align-items: center;
+    background-color: aqua;
+    border-radius: 5px;
+    padding-top: 0px;
+    border-color: transparent;
+}
+
+button.close:hover{
+    border-style: solid;
+    background-color: rgb(0, 161, 161);
+    border-color: rgb(0, 161, 161);
+    transition: 0.2s;
+}
+
+
+
+/*--------------------ID BASED STYLING--------------------*/
+#content{
+    background-color: rgba(0, 0, 0, 0.568);
+}
+
+#cart-sidebar{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+

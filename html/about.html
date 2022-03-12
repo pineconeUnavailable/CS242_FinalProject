@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--        Page Metadata       -->
+    <meta charset="UTF-8">
+    <meta name="author" content="Christen Spadavecchia">
+    <meta name="keywords" content="Store, Online, Retail, Buy, Purchase, Christen, Spadavecchia, Web Developer">
+    <meta name="description" content="Online Storefront">
+    <meta name="robots" content="none">
+
+    <!--        Page Rendering      -->
+    <title>Home Page - Christen Spadavecchia</title> <!-- Page Title -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set Viewport -->
+    <script src="../js/CartManager.js"></script> <!-- Load Cart -->
+    <link rel="stylesheet" href="../css/global.css">
+    </link> <!-- Global Stylesheet Link -->
+    <link rel="stylesheet" href="../css//nav.css">
+    </link> <!-- Nav Stylesheet Link -->
+</head>
+
+<body>
+    <canvas id="bg" style="z-index: -1; position:fixed; margin:0; padding: 0; width: 100%; height: 100%;">
+        Your browser does not support the canvas element.
+    </canvas>
+
+    <div class="flexX growY" id="content">
+        <article>
+
+            <nav class="flexX container">
+                <a class="nav_link nav_title mono" href="../html/home.html">The Corner Store</a>
+                <a class="nav_link mono" href="../html/interests.html">Browse</a>
+                <a class="nav_link mono" href="../html/reflections.html">Order</a>
+            </nav>
+
+            <h1 class="text centerX">About Us</h1>
+            <p class="mono centerX">We don't get many visitors around here.<br><br>
+                Quality over quantity I've always said. <br><br>
+                That means that if you're here. <br><br><br><br><br>
+                You're high quality. <br><br><br><br><br>
+                We know we sell weird stuff... <br>
+                Thats the charm isn't it? <br>
+                <br><br><br><br><br>
+                Enjoy your Tour in The Corner Store
+
+            </p>
+
+            <footer class="bottom">
+                <div>
+                    <nav class="flexX container bottom">
+                        <a class="nav_link mono" href="../html/about.html">About</a>
+                        <a class="nav_link mono" href="../html/contact.html">Contact</a>
+                    </nav>
+                </div>
+            </footer>
+        </article>
+
+        <aside id="cart-sidebar" class="scrollY">
+            <h2 class="growX centerX text" id="cartHeader">Cart</h2>
+            <ul id="cartItems"></ul>
+        </aside>
+    </div>
+
+
+
+    <script src="../js/global.js"></script>
+    <script src="../js/StockManager.js"></script> <!-- Load Inventory -->
+    <script src="../js/bg.js"></script>
+</body>
+
+</html>
