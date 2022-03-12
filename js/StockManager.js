@@ -1,7 +1,7 @@
 let stock = new Array();
 
 {
-    let i = new Item;
+    let i = new DisplayItem;
     i.itemID = "PowderedSugar";
     i.itemName = "Powdered Sugar";
     i.unitCost = "500";
@@ -11,7 +11,7 @@ let stock = new Array();
 }
 
 {
-    let i = new Item;
+    let i = new DisplayItem;
     i.itemID = "FreeGun";
     i.itemName = "Free Gun!!";
     i.unitCost = "0";
@@ -21,7 +21,7 @@ let stock = new Array();
 }
 
 {
-    let i = new Item;
+    let i = new DisplayItem;
     i.itemID = "Soap";
     i.itemName = "Soap";
     i.unitCost = "30";
@@ -33,7 +33,6 @@ let stock = new Array();
 try{
     let stockDisplay = document.getElementById("stock");
     stock.forEach(item => {
-        item.isDisplay = true;
         stockDisplay.appendChild(item.render());
     });
 } catch {}

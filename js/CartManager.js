@@ -24,13 +24,22 @@ var assignID = (function () {
 })();
 
 class Item {
-    constructor() {
+    constructor(itemID, itemName, unitCost, quantity, imageUrl) {
         this.itemInstId = assignID();
-        this.itemID = "aw4at36ds";
-        this.itemName = "Soap";
-        this.unitCost = "30.00";
-        this.quantity = 1;
-        this.imageUrl = "";
+        if(itemID != null){
+            this.itemID = itemID;
+            this.itemName = itemName;
+            this.unitCost = unitCost;
+            this.quantity = quantity;
+            this.imageUrl = imageUrl;
+            
+        } else {
+            this.itemID = "NULL_ITEM";
+            this.itemName = "NULL ITEM";
+            this.unitCost = "10000000";
+            this.quantity = 69;
+        }
+        this.imageShown = false;
         this.isDisplay = false;
     }
 
@@ -41,50 +50,16 @@ class Item {
     render() {
         let node = document.createElement("li").appendChild(document.createElement("div"));
         let btn = document.createElement("button");
-        console.log(this.isDisplay);
-        if(this.isDisplay == false){
-            btn.onclick = () => { cart.removeGuiItem(node, this.itemInstId) };
-            btn.appendChild(document.createTextNode("X"));
-            btn.classList.add("close");
-        } else {
-            btn.onclick = () => {
-                console.log(this);
-                let cpy = Object.create(new Item);
-                cpy.unitCost = this.unitCost;
-                cpy.quantity = 1;
-
-                cpy.itemID = "Soap";
-                cpy.itemName = "Soap2";
-                cpy.unitCost = "300";
-                cpy.quantity = 10;
-                cpy.imageUrl = "example.com"
-
-                console.log("NOT YET IMPLEMENTED\n this value:");
-                console.log(this);
-                cart.addGuiItem(document.getElementById("cart-sidebar"), this);
-            };
-            btn.onclick.bind(this);
-            
-            btn.appendChild(document.createTextNode("✓"));
-            btn.classList.add("add");
-        }
+        btn.onclick = () => { cart.removeGuiItem(node, this.itemInstId) };
+        btn.appendChild(document.createTextNode("X"));
+        btn.classList.add("close");
         node.appendChild(btn);
 
-        node.appendChild(document.createTextNode(this.itemName));
-        node.appendChild(document.createElement("br"));
-        node.appendChild(document.createTextNode("$"));
-        node.appendChild(document.createTextNode(this.unitCost));
-        node.appendChild(document.createElement("br"));
+        node = this.renderBase(node);
 
-        if(this.isDisplay == true){
-            node.appendChild(document.createElement("Available:"));
-        }
         node.appendChild(document.createTextNode(this.quantity));
-        node.classList.add("text");
-        node.classList.add("hidden-list");
-        node.classList.add("item");
 
-        if(this.imageUrl != undefined){
+        if(this.imageUrl != undefined && this.imageShown == true){
             node.appendChild(document.createElement("br"));
             let img = document.createElement("img");
             img.src = this.imageUrl;
@@ -100,18 +75,95 @@ class Item {
 
         return node;
     }
+
+    renderBase(node){
+        node.appendChild(document.createTextNode(this.itemName));
+        node.appendChild(document.createElement("br"));
+        node.appendChild(document.createTextNode("$"));
+        node.appendChild(document.createTextNode(this.unitCost));
+        node.appendChild(document.createElement("br"));
+
+        node.classList.add("text");
+        node.classList.add("hidden-list");
+        node.classList.add("item");
+        return node;
+    }
 }
 
 class DisplayItem extends Item {
-    constructor() {
-        super();
+    constructor(itemID, itemName, unitCost, quantity, imageUrl) {
+        super(itemID, itemName, unitCost, quantity, imageUrl);
+        this.isDisplay = true;
     }
 
     render(){
         let node = document.createElement("li").appendChild(document.createElement("div"));
         let btn = document.createElement("button");
         
+        node.appendChild(document.createElement("Available:"));
+        btn.onclick = () => {
+            if(this instanceof DisplayItem){
+                console.log(this);
+                let cpy = Object.create(new Item);
+                cpy.unitCost = this.unitCost;
+                cpy.quantity = 1;
+                cpy.itemID = this.itemID;
+                cpy.itemName = this.itemName;
+                cpy.unitCost = this.unitCost;
+                cpy.quantity = this.quantity;
+                cpy.imageUrl = this.imageUrl;
+                cpy.imageShown = false;
+
+                console.log("NOT YET IMPLEMENTED\n this value:");
+                console.log(this);
+                cart.addGuiItem(document.getElementById("cart-sidebar"), cpy);
+            }
+        };
+        btn.onclick.bind(this);
+
+        node.onclick = (event) => {
+            if(!(event.target instanceof HTMLButtonElement)){
+                this.imageShown = !this.imageShown;
+                if(this.imageShown){
+                    let img = document.createElement("img");
+                    img.src = this.imageUrl;
+                    img.style.height = "auto";
+                    img.style.marginLeft = "auto";
+                    img.style.marginRight = "auto";
+                    img.style.width = "80%";
+                    img.style.display = "block";
+                    node.appendChild(img);
+                    console.log("i tried");
+                    node.childNodes.forEach(subNode =>{
+                        if(subNode instanceof Text && subNode.textContent == "[Click For More]"){
+                            subNode.remove();
+                        }
+                    });
+                } else {
+                    node.childNodes.forEach(subNode =>{
+                        if(subNode instanceof HTMLImageElement){
+                            subNode.remove();
+                        }
+                    });
+                    node.appendChild(document.createTextNode("[Click For More]"));
+                }
+            }
+        }
+        node.onclick.bind(this);
+
+        btn.appendChild(document.createTextNode("✓"));
+        btn.classList.add("add");
+        node.appendChild(btn);
+
+        node = super.renderBase(node);
+        node.appendChild(document.createTextNode("Stock:" + this.quantity));
+        node.appendChild(document.createElement("br"));
+
+        node.appendChild(document.createTextNode("[Click For More]"));
+        
+        return node;
     }
+    
 }
 
 class Cart {
