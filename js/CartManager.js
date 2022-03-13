@@ -50,7 +50,7 @@ class Item {
     render() {
         let node = document.createElement("li").appendChild(document.createElement("div"));
         let btn = document.createElement("button");
-        btn.onclick = () => { cart.removeGuiItem(node, this.itemInstId) };
+        btn.onclick = () => { cart.removeGuiItem(document.getElementById("cartItems"), this.itemInstId) };
         btn.appendChild(document.createTextNode("X"));
         btn.classList.add("close");
         node.appendChild(btn);
@@ -103,7 +103,6 @@ class DisplayItem extends Item {
         node.appendChild(document.createElement("Available:"));
         btn.onclick = () => {
             if(this instanceof DisplayItem){
-                console.log(this);
                 let cpy = Object.create(new Item);
                 cpy.unitCost = this.unitCost;
                 cpy.quantity = 1;
@@ -114,9 +113,7 @@ class DisplayItem extends Item {
                 cpy.imageUrl = this.imageUrl;
                 cpy.imageShown = false;
 
-                console.log("NOT YET IMPLEMENTED\n this value:");
-                console.log(this);
-                cart.addGuiItem(document.getElementById("cart-sidebar"), cpy);
+                cart.addGuiItem(document.getElementById("cartItems"), cpy);
             }
         };
         btn.onclick.bind(this);
@@ -181,9 +178,11 @@ class Cart {
     }
 
     renderTo(element) {
-        cartItems.innerHTML = "";
+        element.innerHTML = "";
         this.items.forEach(item => {
-            element.appendChild(item.render());
+            let newElem = document.createElement("li");
+            newElem.appendChild(item.render());
+            element.appendChild(newElem);
         });
     }
 
@@ -192,17 +191,18 @@ class Cart {
     }
 
     addGuiItem(node, item){
-        this.renderTo(node);
         this.addItem(item);
+        this.renderTo(node);
     }
 
     addItem(item) {
-        this.items += item;
+        this.items.push(item);
     }
 
     removeGuiItem(node, item) {
-        node.remove();
+        // node.remove();
         this.removeItem(item);
+        this.renderTo(node);
     }
 
     
