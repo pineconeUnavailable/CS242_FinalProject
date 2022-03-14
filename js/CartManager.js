@@ -50,16 +50,19 @@ class Item {
     render() {
         let node = document.createElement("li").appendChild(document.createElement("div"));
         let btn = document.createElement("button");
+        // ----------- Close Button -----------//
         btn.onclick = () => { cart.removeGuiItem(document.getElementById("cartItems"), this.itemInstId) };
         btn.appendChild(document.createTextNode("X"));
         btn.classList.add("close");
         node.appendChild(btn);
 
+        // ----------- Name and Unit Cost -----------//
         node = this.renderBase(node);
 
         node.appendChild(document.createTextNode(this.quantity));
         node.appendChild(document.createTextNode(" "));
 
+        // ----------- Display & Toggle Image -----------//
         if(this.imageUrl != undefined && this.imageShown == true){
             node.appendChild(document.createElement("br"));
             let img = document.createElement("img");
@@ -74,17 +77,16 @@ class Item {
             this.imageUrl = undefined;
         }
 
+        // ----------- Quantity Increment / Decrement -----------//
         let changeAmt = (increment) => {
             if(this.quantity + increment > 0){
                 let maxQ = 0;
-                console.log(this);
                 stock.forEach((elem, i) => {
                     if(this.itemID == stock[i].itemID){
                         maxQ = elem.quantity;
                         // console.log("myID:  " + this.itemID + "  otherID: " + elem.itemID);
                     }
                 });
-                console.log("maxQ : " +  maxQ + " quant: " + this.quantity +" inc: " + increment);
                 if(maxQ >= this.quantity + increment){
                     this.quantity += increment;
                 }
@@ -102,6 +104,54 @@ class Item {
         btnMore.appendChild(document.createTextNode(">"));
         btnMore.classList.add("change");
         node.appendChild(btnMore);
+
+        // ----------- Options Selection -----------//
+        try {
+            if(orderSummary == true) {
+                node.appendChild(document.createElement("br")); //newline
+                let div = document.createElement("div");//shipping div
+
+                //button 0
+                let btnRad0 = document.createElement("input");
+                btnRad0.type = "radio";
+                btnRad0.name = this.itemID;
+                btnRad0.oninput = () =>{
+                    this.shipping = "Box";
+                    updateFunc();
+                }
+                
+                div.appendChild(document.createTextNode("Ship in: "));
+                div.appendChild(document.createTextNode(" "));
+                div.appendChild(btnRad0);
+                div.appendChild(document.createTextNode("Box "));
+                div.appendChild(document.createTextNode(" "));
+                
+                //button 1
+                let btnRad1 = document.createElement("input");
+                btnRad1.type = "radio";
+                btnRad1.name = this.itemID;
+                btnRad1.oninput = () => {
+                    this.shipping = "Crate";
+                    updateFunc();
+                };
+                
+
+                div.appendChild(btnRad1);
+                div.appendChild(document.createTextNode("Crate [+$10]"));
+                div.classList.add("centerX");
+                div.appendChild(document.createTextNode(" "));
+
+                if(this.shipping == "Crate"){
+                    btnRad1.checked = true;
+                } else {
+                    btnRad0.checked = true;
+                    this.shipping = "Box";
+                }
+
+                node.appendChild(div);
+            }
+        } catch {}
+
         return node;
     }
 
@@ -212,6 +262,9 @@ class Cart {
             newElem.appendChild(item.render());
             element.appendChild(newElem);
         });
+        try{
+            updateFunc();
+        } catch {}
     }
 
     getItems() {
@@ -255,6 +308,9 @@ class Cart {
         let total = 0;
         this.items.forEach(item => {
             total += item.unitCost * item.quantity;
+            if(item.shipping == "Crate"){
+                total += 10;
+            }
         });
         return total;
     }

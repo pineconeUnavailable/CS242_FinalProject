@@ -13,7 +13,7 @@
     <title>The Corner Store</title> <!-- Page Title -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set Viewport -->
     <script>
-        let orderSummary = true;
+        window.orderSummary = true;
     </script>
     <script src="../js/CartManager.js"></script> <!-- Load Cart -->
     <link rel="stylesheet" href="../css/global.css">
@@ -90,7 +90,6 @@
         };
 
         updateFunc();
-        onclick = updateFunc;
     </script>
     <script src="../js/resize.js"></script> <!-- Handle Scaling Sidebar Intelligently -->
     <script src="../js/bg.js"></script>

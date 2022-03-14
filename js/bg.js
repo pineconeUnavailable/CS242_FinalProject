@@ -239,7 +239,7 @@ document.addEventListener('mouseup', function (event) {
     //suppress slingshot feature when not in main area
     if(lastHovered != document.getElementsByTagName("article")[0]){
         drawSlingshot = false;
-        return;S
+        return;
     }
     
 

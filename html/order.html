@@ -59,9 +59,7 @@
             <h4 class="centerX text" id="subTotal">$38</h4>
             <h4 class="centerX text" id="tax">$1</h4>
             <h4 class="centerX text" id="total">$39</h4>
-            <a style="text-decoration: none;" href="../html/checkout.html">
-                <button class="confirm">Proceed to Checkout</button>
-            </a>
+            <button onclick="validateOrder();" class="confirm">Proceed to Checkout</button>
         </aside>
     </div>
 
@@ -70,6 +68,15 @@
     <script src="../js/global.js"></script>
     <script src="../js/StockManager.js"></script> <!-- Load Inventory -->
     <script>
+        function validateOrder(){
+            if(cart.items.length > 0){
+                window.location.href = "../html/checkout.html";
+            } else {
+                alert("Please add something to your cart from the Browse section before you check out!");
+            }
+        }
+
+
         let gList = document.getElementById("itemList");
         let gTotal = document.getElementById("total");
         let gTax = document.getElementById("tax");
@@ -92,7 +99,7 @@
         };
 
         updateFunc();
-        onclick = updateFunc;
+        //onclick = updateFunc;
     </script>
     <script src="../js/resize.js"></script> <!-- Handle Scaling Sidebar Intelligently -->
     <script src="../js/bg.js"></script>
