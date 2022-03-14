@@ -12,6 +12,9 @@
     <!--        Page Rendering      -->
     <title>The Corner Store</title> <!-- Page Title -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set Viewport -->
+    <script>
+        let orderSummary = true;
+    </script>
     <script src="../js/CartManager.js"></script> <!-- Load Cart -->
     <link rel="stylesheet" href="../css/global.css">
     </link> <!-- Global Stylesheet Link -->
@@ -33,10 +36,9 @@
                 <a class="nav_link mono" href="../html/order.html">Order</a>
             </nav>
 
-            <h1 class="text centerX">Top Items</h1>
-            <div class="scrollY">
-                <ul class="grid" id="stock"></ul>
-            </div>
+            <h1 class="text centerX">Order</h1>
+            <h3 class="text centerX">Your Items:</h3>
+            <ul id="cartItems"></ul>
 
             <footer class="bottom">
                 <div>
@@ -48,9 +50,15 @@
             </footer>
         </article>
 
-        <aside id="cart-sidebar" class="scrollY">
-            <h2 class="growX centerX text" id="cartHeader">Cart</h2>
-            <ul id="cartItems"></ul>
+        <aside>
+            <h2 class="growX centerX text" id="cartHeader">Order Details</h2>
+            <br>
+            <h3 class="centerX text">Items:</h3>
+            <p class="text" id="itemList"></p>
+            <h3 class="centerX text">Bill:</h3>
+            <h4 class="centerX text" id="subTotal">$38</h4>
+            <h4 class="centerX text" id="tax">$1</h4>
+            <h4 class="centerX text" id="total">$39</h4>
         </aside>
     </div>
 
@@ -59,10 +67,29 @@
     <script src="../js/global.js"></script>
     <script src="../js/StockManager.js"></script> <!-- Load Inventory -->
     <script>
-        let stockDisplay = document.getElementById("stock");
-        for(let i = 0; i < 3; i++){
-            stockDisplay.appendChild(stock[i].render());
-        }
+        let gList = document.getElementById("itemList");
+        let gTotal = document.getElementById("total");
+        let gTax = document.getElementById("tax");
+        let gSubTotal = document.getElementById("subTotal");
+
+        var formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        });
+
+        let updateFunc = () => {
+            gList.innerHTML = "";
+            gList.appendChild(cart.getItemList());
+            
+            let subTotal = Number(cart.getTotal());
+            let tax = subTotal * 0.1;
+            gSubTotal.textContent = "Subtotal: " + formatter.format(subTotal);
+            gTax.textContent = "Tax: " + formatter.format(tax);
+            gTotal.textContent = "Total: " + formatter.format(Number(subTotal + tax));
+        };
+
+        updateFunc();
+        onclick = updateFunc;
     </script>
     <script src="../js/bg.js"></script>
 </body>

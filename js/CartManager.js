@@ -58,6 +58,7 @@ class Item {
         node = this.renderBase(node);
 
         node.appendChild(document.createTextNode(this.quantity));
+        node.appendChild(document.createTextNode(" "));
 
         if(this.imageUrl != undefined && this.imageShown == true){
             node.appendChild(document.createElement("br"));
@@ -73,6 +74,34 @@ class Item {
             this.imageUrl = undefined;
         }
 
+        let changeAmt = (increment) => {
+            if(this.quantity + increment > 0){
+                let maxQ = 0;
+                console.log(this);
+                stock.forEach((elem, i) => {
+                    if(this.itemID == stock[i].itemID){
+                        maxQ = elem.quantity;
+                        // console.log("myID:  " + this.itemID + "  otherID: " + elem.itemID);
+                    }
+                });
+                console.log("maxQ : " +  maxQ + " quant: " + this.quantity +" inc: " + increment);
+                if(maxQ >= this.quantity + increment){
+                    this.quantity += increment;
+                }
+            }
+            cart.renderTo(document.getElementById("cartItems"));
+        };
+
+        let btnLess = document.createElement("button");
+        btnLess.onclick = () =>{changeAmt(-1);};
+        btnLess.appendChild(document.createTextNode("<"));
+        btnLess.classList.add("change");
+        node.appendChild(btnLess);
+        let btnMore = document.createElement("button");
+        btnMore.onclick = () =>{changeAmt(1);};
+        btnMore.appendChild(document.createTextNode(">"));
+        btnMore.classList.add("change");
+        node.appendChild(btnMore);
         return node;
     }
 
@@ -109,7 +138,7 @@ class DisplayItem extends Item {
                 cpy.itemID = this.itemID;
                 cpy.itemName = this.itemName;
                 cpy.unitCost = this.unitCost;
-                cpy.quantity = this.quantity;
+                cpy.quantity = 1;
                 cpy.imageUrl = this.imageUrl;
                 cpy.imageShown = false;
 
@@ -130,7 +159,6 @@ class DisplayItem extends Item {
                     img.style.width = "80%";
                     img.style.display = "block";
                     node.appendChild(img);
-                    console.log("i tried");
                     node.childNodes.forEach(subNode =>{
                         if(subNode instanceof Text && subNode.textContent == "[Click For More]"){
                             subNode.remove();
@@ -221,6 +249,23 @@ class Cart {
 
     clear(){
         this.items.clear();
+    }
+
+    getTotal(){
+        let total = 0;
+        this.items.forEach(item => {
+            total += item.unitCost * item.quantity;
+        });
+        return total;
+    }
+
+    getItemList(){
+        let itemList = document.createElement("p");
+        this.items.forEach(item => {
+            itemList.appendChild(document.createTextNode(item.itemName + " x" + item.quantity));
+            itemList.appendChild(document.createElement("br"));
+        });
+        return itemList;
     }
 }
 

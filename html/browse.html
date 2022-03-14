@@ -24,14 +24,16 @@
         Your browser does not support the canvas element.
     </canvas>
 
+    
     <div class="flexX growY" id="content">
-        <article>
-
-            <nav class="flexX container">
+        
+        <article class="scrollY">
+            <nav class="flexX container" style="width: 78%; float: left;">
                 <a class="nav_link nav_title mono" href="../html/index.html">The Corner Store</a>
-                <a class="nav_link mono" href="../html/interests.html">Browse</a>
-                <a class="nav_link mono" href="../html/reflections.html">Order</a>
+                <a class="nav_link mono" href="../html/browse.html">Browse</a>
+                <a class="nav_link mono" href="../html/order.html">Order</a>
             </nav>
+            
 
             <h1 class="text centerX">All Items</h1>
             <div class="scrollY">
@@ -59,6 +61,12 @@
     <script src="../js/global.js"></script>
     <script src="../js/StockManager.js"></script> <!-- Load Inventory -->
     <script src="../js/bg.js"></script>
+    <script>
+        let stockDisplay = document.getElementById("stock");
+        stock.forEach(item => {
+            stockDisplay.appendChild(item.render());
+        });
+    </script>
 </body>
 
 </html>
