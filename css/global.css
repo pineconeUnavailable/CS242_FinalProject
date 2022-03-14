@@ -67,7 +67,7 @@ body {
     overflow:auto;
 }
 
-aside {
+aside.scrollY {
     width: 20%;
     padding: 1%;
     height: auto;
@@ -82,7 +82,7 @@ aside {
     width: 3px;
 }
 
-article{
+article.scrollY{
     width: 80%;
 }
 

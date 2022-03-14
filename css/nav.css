@@ -29,8 +29,10 @@ nav>a.nav_link {
 
 nav>a.nav_title {
     color:rgb(107, 255, 255);
-        margin-right: auto;
+    margin-right: auto;
 }
+
+
 
 .bottom{
     /* overflow: hidden; */
@@ -46,7 +48,7 @@ nav>a.nav_title {
     text-align: center;
     /* padding: 14px 16px; */
     text-decoration: none;
-    font-size: 17px;
+    font-size: 10px;
 }
 
 nav > * {
@@ -65,10 +67,10 @@ nav > * {
     nav>a.nav_title {
         margin-right: auto;
     }
-    .bottom{
-        font-size: 25em;
+    /* .bottom{
+        font-size: 20em;
         margin: 10px;
-    }
+    } */
 }
 
 @media only screen and (max-width: 1000px) {
@@ -78,9 +80,9 @@ nav > * {
     nav>a.nav_link {
         font-size: 14px;
     }
-    .bottom{
-        font-size: 25em;
-    }
+    /* .bottom{
+        font-size: 20em;
+    } */
 }
 
 @media only screen and (min-width: 4000px) {
@@ -90,9 +92,9 @@ nav > * {
     nav>a.nav_link {
         font-size: 100px;
     }
-    .bottom{
-        font-size: 25em;
-    }
+    /* .bottom{
+        font-size: 20em;
+    } */
 } 
 
 @media only screen and (max-width: 2000px) {
@@ -102,9 +104,9 @@ nav > * {
     nav>a.nav_link {
         font-size: 30px;
     }
-    .bottom{
-        font-size: 25em;
-    }
+    /* nav>.bottom>a{
+        font-size: 500em;
+    } */
 }
 
 @media only screen and (max-width: 900px) {
@@ -114,9 +116,9 @@ nav > * {
     nav>a.nav_link {
         font-size: 20px;
     }
-    .bottom{
-        font-size: 25em;
-    }
+    /* .bottom{
+        font-size: 20em;
+    } */
 }
 
 @media only screen and (max-width: 800px) {
@@ -126,9 +128,9 @@ nav > * {
     nav>a.nav_link {
         font-size: 16px;
     }
-    .bottom{
-        font-size: 25em;
-    }
+    /* .bottom{
+        font-size: 20em;
+    } */
 }
 
 @media only screen and (max-width: 600px) {
@@ -138,9 +140,9 @@ nav > * {
     nav>a.nav_link {
         font-size: 10px;
     }
-    .bottom{
-        font-size: 25em;
-    }
+    /* .bottom{
+        font-size: 20em;
+    } */
 }
 
 @media only screen and (max-width: 300px) {
@@ -150,8 +152,14 @@ nav > * {
     nav>a.nav_link {
         font-size: 8px;
     }
-    .bottom{
-        font-size: 25em;
+    /* .bottom{
+        font-size: 20em;
+    } */
+}
+
+@media only screen and (min-width: 20px) {
+    nav.bottom>a.nav_link {
+        font-size: 8px;
     }
 }
 
