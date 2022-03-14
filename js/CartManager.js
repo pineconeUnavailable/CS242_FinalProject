@@ -37,7 +37,7 @@ class Item {
             this.itemID = "NULL_ITEM";
             this.itemName = "NULL ITEM";
             this.unitCost = "10000000";
-            this.quantity = 69;
+            this.quantity = 0;
         }
         this.imageShown = false;
         this.isDisplay = false;
@@ -210,7 +210,7 @@ class DisplayItem extends Item {
                     img.style.display = "block";
                     node.appendChild(img);
                     node.childNodes.forEach(subNode =>{
-                        if(subNode instanceof Text && subNode.textContent == "[Click For More]"){
+                        if(subNode instanceof Text && subNode.textContent == "[Click To View]"){
                             subNode.remove();
                         }
                     });
@@ -220,7 +220,7 @@ class DisplayItem extends Item {
                             subNode.remove();
                         }
                     });
-                    node.appendChild(document.createTextNode("[Click For More]"));
+                    node.appendChild(document.createTextNode("[Click To View]"));
                 }
             }
         }
@@ -234,7 +234,7 @@ class DisplayItem extends Item {
         node.appendChild(document.createTextNode("Stock:" + this.quantity));
         node.appendChild(document.createElement("br"));
 
-        node.appendChild(document.createTextNode("[Click For More]"));
+        node.appendChild(document.createTextNode("[Click To View]"));
         
         return node;
     }

@@ -38,6 +38,49 @@
 
             <h1 class="text centerX">Checkout</h1>
 
+            <form class="mono centerX" style="width: 100%;" name="FeedbackForm" action="thanks.html" onsubmit="validate()">
+                First Name:&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" name="firstName" class="dynamic-txt" size="40" />
+                <br>
+
+                Last Name:
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="dynamic-txt" name="lastName" size="40" />
+                <br>
+                Address: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="dynamic-txt" name="address" size="40" />
+                <br>
+                Apt#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
+                <br>
+                City: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
+                <br>
+                State: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
+                <br>
+                Zip Code: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
+                <br>
+                Email:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="dynamic-txt" name="email" size="40" />
+                <br>
+                Phone Number:
+                &nbsp;
+                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
+                <br>
+
+                
+            <br>
+
+            
+            <input class="confirm" type="submit" value="Place Order" style="font-weight: bold;">
+            <br>
+            <br>
+
+            </form>
+
             <footer class="bottom">
                 <div>
                     <nav class="flexX container bottom">
@@ -49,7 +92,7 @@
         </article>
 
         <aside id="cart-sidebar" class="scrollY">
-            <h2 class="growX centerX text" id="cartHeader">Order Details</h2>
+            <h2 class="growX centerX text" id="cartHeader">Order Summary</h2>
             <br>
             <h3 class="centerX text">Items:</h3>
             <p class="text" id="itemList"></p>

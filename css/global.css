@@ -192,7 +192,7 @@ button.change:hover{
     background-color: rgba(0, 17, 255, 0.301);
 }
 
-button.confirm{
+.confirm{
     align-items: center;
     background-color: transparent;
     border-radius: 5px;
