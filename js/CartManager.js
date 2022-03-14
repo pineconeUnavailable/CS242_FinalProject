@@ -78,29 +78,15 @@ class Item {
         }
 
         // ----------- Quantity Increment / Decrement -----------//
-        let changeAmt = (increment) => {
-            if(this.quantity + increment > 0){
-                let maxQ = 0;
-                stock.forEach((elem, i) => {
-                    if(this.itemID == stock[i].itemID){
-                        maxQ = elem.quantity;
-                        // console.log("myID:  " + this.itemID + "  otherID: " + elem.itemID);
-                    }
-                });
-                if(maxQ >= this.quantity + increment){
-                    this.quantity += increment;
-                }
-            }
-            cart.renderTo(document.getElementById("cartItems"));
-        };
+        
 
         let btnLess = document.createElement("button");
-        btnLess.onclick = () =>{changeAmt(-1);};
+        btnLess.onclick = () =>{this.changeAmt(-1);};
         btnLess.appendChild(document.createTextNode("<"));
         btnLess.classList.add("change");
         node.appendChild(btnLess);
         let btnMore = document.createElement("button");
-        btnMore.onclick = () =>{changeAmt(1);};
+        btnMore.onclick = () =>{this.changeAmt(1);};
         btnMore.appendChild(document.createTextNode(">"));
         btnMore.classList.add("change");
         node.appendChild(btnMore);
@@ -155,6 +141,22 @@ class Item {
         return node;
     }
 
+    changeAmt(increment){
+        console.log(this);
+        if(this.quantity + increment > 0){
+            let maxQ = 0;
+            stock.forEach((elem, i) => {
+                if(this.itemID == stock[i].itemID){
+                    maxQ = elem.quantity;
+                }
+            });
+            if(maxQ >= this.quantity + increment){
+                this.quantity += increment;
+            }
+        }
+        cart.renderTo(document.getElementById("cartItems"));
+    };
+
     renderBase(node){
         node.appendChild(document.createTextNode(this.itemName));
         node.appendChild(document.createElement("br"));
@@ -182,17 +184,28 @@ class DisplayItem extends Item {
         node.appendChild(document.createElement("Available:"));
         btn.onclick = () => {
             if(this instanceof DisplayItem){
-                let cpy = Object.create(new Item);
-                cpy.unitCost = this.unitCost;
-                cpy.quantity = 1;
-                cpy.itemID = this.itemID;
-                cpy.itemName = this.itemName;
-                cpy.unitCost = this.unitCost;
-                cpy.quantity = 1;
-                cpy.imageUrl = this.imageUrl;
-                cpy.imageShown = false;
+                let existing = null;
+                cart.items.forEach(elem => {
+                    if(this.itemID == elem.itemID){
+                        elem.changeAmt(1);
+                        cart.renderTo(document.getElementById("cartItems"));
+                        existing = elem;
+                    }
+                });
 
-                cart.addGuiItem(document.getElementById("cartItems"), cpy);
+                if(existing == null){
+                    let cpy = Object.create(new Item);
+                    cpy.unitCost = this.unitCost;
+                    cpy.quantity = 1;
+                    cpy.itemID = this.itemID;
+                    cpy.itemName = this.itemName;
+                    cpy.unitCost = this.unitCost;
+                    cpy.quantity = 1;
+                    cpy.imageUrl = this.imageUrl;
+                    cpy.imageShown = false;
+
+                    cart.addGuiItem(document.getElementById("cartItems"), cpy);
+                }
             }
         };
         btn.onclick.bind(this);

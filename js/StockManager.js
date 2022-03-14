@@ -95,7 +95,7 @@ let stock = new Array();
     i.itemID = "oldwatch";
     i.itemName = "Antique Pocketwatch";
     i.unitCost = 140;
-    i.quantity = 1;
+    i.quantity = 2;
     i.imageUrl = "../res/antique_watch.jpg";
     stock.push(i)
 }

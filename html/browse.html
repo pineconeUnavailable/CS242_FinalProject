@@ -53,6 +53,10 @@
         <aside id="cart-sidebar" class="scrollY">
             <h2 class="growX centerX text" id="cartHeader">Cart</h2>
             <ul id="cartItems"></ul>
+            <a style="display:none" id="toOrder" href="../html/order.html">
+                <button class="confirm">Proceed to Order</button>
+            </a>
+
         </aside>
     </div>
 
@@ -63,10 +67,22 @@
     <script src="../js/resize.js"></script> <!-- Handle Scaling Sidebar Intelligently -->
     <script src="../js/bg.js"></script>
     <script>
+        let toOrder = document.getElementById("toOrder");
         let stockDisplay = document.getElementById("stock");
         stock.forEach(item => {
             stockDisplay.appendChild(item.render());
         });
+
+        let showNextBtn = ()=>{
+            if(cart.items.length > 0){
+                toOrder.style.display = "block";
+            } else {
+                toOrder.style.display = "none";
+            }
+        };
+
+        onclick = showNextBtn;
+        showNextBtn();
     </script>
 </body>
 
