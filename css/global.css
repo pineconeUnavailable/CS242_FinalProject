@@ -73,6 +73,12 @@ aside {
     height: auto;
     border-style:groove;
     background-color: rgba(0, 0, 0, 0.219);
+    scrollbar-color: rgb(138, 138, 138) rgb(61, 61, 61);
+}
+::-webkit-scrollbar {
+    border-radius: 5px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    background-color: rgb(150, 32, 32);
 }
 
 article{

@@ -238,7 +238,7 @@ function read_cookie(name) {
     return result;
 }
 
-function bake_cookie(name, value) {
+function bake_cookie(value) {
     // let cookie = [name, '=', JSON.stringify(value), '; domain=.', window.location.host.toString(), '; path=/;'].join('');
     let cookie = JSON.stringify(value);
     document.cookie = cookie;
@@ -250,4 +250,4 @@ function bake_cookie(name, value) {
 
 
 var cart = getCart(read_cookie("CartData"));
-window.onbeforeunload = () => { bake_cookie("CartData", cart); };
+window.onbeforeunload = () => { bake_cookie(cart); };
