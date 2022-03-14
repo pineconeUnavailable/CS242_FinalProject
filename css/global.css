@@ -192,6 +192,22 @@ button.change:hover{
     background-color: rgba(0, 17, 255, 0.301);
 }
 
+button.confirm{
+    align-items: center;
+    background-color: transparent;
+    border-radius: 5px;
+    padding-top: 0px;
+    border-color: aqua;
+    color:aqua;
+    font-size: 1em;
+    width: 50%;
+    height: 3em;
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .scrollY{
     overflow-y: scroll;
 }
