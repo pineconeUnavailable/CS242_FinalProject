@@ -212,6 +212,10 @@ button.change:hover{
     overflow-y: scroll;
 }
 
+.frm-txt{
+    margin-left: 30%;
+}
+
 /*--------------------ID BASED STYLING--------------------*/
 #content{
     background-color: rgba(0, 0, 0, 0.568);

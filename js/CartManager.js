@@ -1,19 +1,19 @@
-function getCart(cartJSON) {
-    try { //deserialize existing cart
-        let obj = JSON.parse(cartJSON);
-        if (obj == null) {
-            console.log("Unable to Parse Cart\nCreated new cart");
-            return new Cart;
-        }
-        console.log("Loaded existing cart");
+// function getCart(cartJSON) {
+//     try { //deserialize existing cart
+//         let obj = JSON.parse(cartJSON);
+//         if (obj == null) {
+//             console.log("Unable to Parse Cart\nCreated new cart");
+//             return new Cart;
+//         }
+//         console.log("Loaded existing cart");
 
-        return Cart.from(obj);
-    } catch (error) { //new cart
-        console.log(error);
-        console.log("Created new cart");
-        return new Cart;
-    }
-}
+//         return Cart.from(obj);
+//     } catch (error) { //new cart
+//         console.log(error);
+//         console.log("Created new cart");
+//         return new Cart;
+//     }
+// }
 
 var assignID = (function () {
     let i = 1;
@@ -342,6 +342,91 @@ class Cart {
 
 
 
+
+
+
+
+
+class FormDataStore {
+    constructor() {
+        this.firstName = "";
+        this.lastName = "";
+        this.address = "";
+        this.aptNum = "";
+        this.city = "";
+        this.state = "";
+        this.zipcode = "";
+        this.email = "";
+        this.phone = "";
+    }
+    
+    static from(frm) {
+        return Object.assign(new FormDataStore, frm);
+    }
+
+    static initFromEnv(){
+        let form = document.getElementById("purchaseForm");
+        let sFrm = new FormDataStore;
+        sFrm.firstName = form.elements["firstName"].value;
+        sFrm.lastName = form.elements["lastName"].value;
+        sFrm.address = form.elements["address"].value;
+        sFrm.aptNum = form.elements["aptNum"].value;
+        sFrm.city = form.elements["city"].value;
+        sFrm.state = form.elements["state"].value;
+        sFrm.zipcode = form.elements["zipcode"].value;
+        sFrm.email = form.elements["email"].value;
+        sFrm.phone = form.elements["phone"].value;
+        return sFrm;
+    }
+
+    toJSON(){
+        return JSON.stringify(this);
+    }
+}
+
+
+
+
+class PageData {
+    constructor(){
+        this.cart = null;
+        this.form = null;
+    }
+
+    static from(data) {
+        let dat = Object.assign(new PageData, data);
+
+        try{
+            dat.cart = Cart.from(JSON.parse(dat.cart));
+        } catch (err) {
+            console.log(err);
+            dat.cart = null;
+        }
+        try {
+            dat.form = FormDataStore.from(JSON.parse(dat.form));
+        } catch (err) {
+            dat.form = null;
+            console.log(err);
+            console.log("Created new FormDataStore")
+            dat.form = new FormDataStore();
+        }
+
+        if(dat.cart == null){
+            console.log("Created new cart")
+            dat.cart = new Cart();
+        }
+
+        return dat;
+    }
+
+    toJSON(){
+        return JSON.stringify(this);
+    }
+}
+
+
+
+
 /*--------------------------------------------------*/
 //The following 2 functions are from this source:
 //https://stackoverflow.com/questions/11344531/pure-javascript-store-object-in-cookie
@@ -363,5 +448,12 @@ function bake_cookie(value) {
 
 
 
-var cart = getCart(read_cookie("CartData"));
-window.onbeforeunload = () => { bake_cookie(cart); };
+// var cart = getCart(read_cookie("CartData"));
+// window.onbeforeunload = () => { bake_cookie(cart); };
+
+let pageData = PageData.from(document.cookie);
+let cart = PageData.cart;
+
+window.onbeforeunload = () => {
+    document.cookie = pageData.toJSON();
+};

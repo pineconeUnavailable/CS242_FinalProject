@@ -20,6 +20,11 @@
     </link> <!-- Global Stylesheet Link -->
     <link rel="stylesheet" href="../css//nav.css">
     </link> <!-- Nav Stylesheet Link -->
+    <script src="../js/lib/jquery-3.2.1.min.js"></script> <!-- JQuery -->
+    <script type="text/javascript" src="../js/lib/jquery.validate.js"></script><!-- JQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script> <!-- More validators -->>
+    <script src="../js/validatePurchase.js"></script> <!-- Purchase Validator -->
+    <script src="../js/FormManager.js"></script> <!-- Form Manager -->
 </head>
 
 <body>
@@ -37,47 +42,53 @@
             </nav>
 
             <h1 class="text centerX">Checkout</h1>
-
-            <form class="mono centerX" style="width: 100%;" name="FeedbackForm" action="summary.html" onsubmit="validate()">
-                First Name:&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" name="firstName" class="dynamic-txt" size="40" />
-                <br>
-
-                Last Name:
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" class="dynamic-txt" name="lastName" size="40" />
-                <br>
-                Address: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" class="dynamic-txt" name="address" size="40" />
-                <br>
-                Apt#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
-                <br>
-                City: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
-                <br>
-                State: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
-                <br>
-                Zip Code: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
-                <br>
-                Email:
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" class="dynamic-txt" name="email" size="40" />
-                <br>
-                Phone Number:
-                &nbsp;
-                <input type="text" class="dynamic-txt" name="aptNum" size="40" />
-                <br>
-
-                
-            <br>
-
             
-            <input class="confirm" type="submit" value="Place Order" style="font-weight: bold;">
-            <br>
-            <br>
+            <form id="purchaseForm" class="mono" style="width: 100%;" name="FeedbackForm" action="summary.html">
+                <div>
+                    <div style="display: contents;">
+                        <span class="frm-txt">First Name:</span>
+                        &nbsp;&nbsp;&nbsp;
+                        <input id="text" type="text" name="firstName" class="dynamic-txt" size="40" />*
+                        <br>
+
+                        <span class="frm-txt">Last Name:</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="dynamic-txt" name="lastName" size="40" />*
+                        <br>
+                        <span class="frm-txt">Address:</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="dynamic-txt" name="address" size="40" />*
+                        <br>
+                        <span class="frm-txt">Apt#:</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="dynamic-txt" name="aptNum" size="40" />&nbsp;
+                        <br>
+                        <span class="frm-txt">City:</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="dynamic-txt" name="city" size="40" />*
+                        <br>
+                        <span class="frm-txt">State:</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="dynamic-txt" name="state" size="40" />*
+                        <br>
+                        <span class="frm-txt">Zip Code:</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="dynamic-txt" name="zipcode" size="40" />*
+                        <br>
+                        <span class="frm-txt">Email:</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="dynamic-txt" name="email" size="40" />*
+                        <br>
+                        <span class="frm-txt">Phone Number:</span>
+                        &nbsp;
+                        <input type="text" class="dynamic-txt" name="phone" size="40" />*
+                        <br>
+                        <br>
+                        <input class="confirm" type="submit" value="Place Order" style="font-weight: bold;">
+                        <br>
+                        <br>
+                    </div>
+                </div>
 
             </form>
 
