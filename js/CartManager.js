@@ -394,7 +394,7 @@ class PageData {
     }
 
     static from(data) {
-        let dat = Object.assign(new PageData, data);
+        let dat = Object.assign(new PageData, JSON.parse(data));
 
         try{
             dat.cart = Cart.from(JSON.parse(dat.cart));
