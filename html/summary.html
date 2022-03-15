@@ -82,6 +82,10 @@
 
             let details = document.getElementById("details");
             let info = pageData.form;
+            let date = new Date();
+            let days = Math.random() * 10 + 4;
+            let clockDisplay = document.createElement("p");
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
             appendLine(details, "Delivering Order To:");
             appendLine(details, info.firstName + " " + info.lastName);
             appendLine(details, info.address + " " + info.aptNum);
@@ -89,11 +93,27 @@
             appendLine(details, info.email);
             appendLine(details, info.phone);
             appendLine(details, " ");
+            appendLine(details, "Estimated Delivery Date: " + date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear());
+            details.appendChild(clockDisplay);
+            appendLine(details, " ");
             appendLine(details, " Items: ");
 
             //Clear cookies to mitigate security risks
             pageData.cart.items.length = 0;
             pageData.form = new FormDataStore();
+
+            let updateTimer = ()=>{
+                let remaining = (date - Date.now()) / 1000;
+                let days = Math.floor(remaining/86400);
+                remaining -= days * 86400;
+                let hours = Math.floor(remaining/3600) % 24;
+                remaining -= hours * 3600;
+                let minutes = Math.floor(remaining/60) % 60;
+                remaining = Math.floor(remaining - (minutes * 60));
+                clockDisplay.textContent = days + " Days " + hours + " Hours " + minutes + " Minutes " + remaining + " seconds. ";
+            };
+            setInterval(updateTimer, 1000);
+
         } else {
             gTotal.textContent = "nothing to see here!";
         }

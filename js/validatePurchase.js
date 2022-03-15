@@ -29,11 +29,6 @@ $(document).ready(function () {
             },
         },
         messages: {
-            ContactFormSubject: "blah blah",
-            FullName: "blah blah",
-            username: "blah blah",
-            EmailAddress: {required:"blah blah", email:"blah blah email"},
-            UserComment:"blah blah"
         }
     });
 
