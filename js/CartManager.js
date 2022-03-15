@@ -69,7 +69,6 @@ class Item {
             img.style.objectFit ="contain";
 
             node.appendChild(img);
-            this.imageUrl = undefined;
         }
 
         // ----------- Quantity Increment / Decrement -----------//
