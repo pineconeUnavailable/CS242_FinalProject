@@ -1,5 +1,8 @@
 $.validator.setDefaults({
-    submitHandler: function () { alert("submitted!"); }
+    submitHandler: function () {
+        pageData.form = FormDataStore.initFromEnv();
+        window.location.href = 
+    }
 });
 
 $(document).ready(function () {

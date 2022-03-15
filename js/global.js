@@ -1,5 +1,7 @@
 //render cart
 let cartItems = document.getElementById("cartItems");
-cart.renderTo(cartItems);
+try {
+    cart.renderTo(cartItems);
+} catch {}
 
 //

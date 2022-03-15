@@ -361,12 +361,12 @@ class FormDataStore {
     }
     
     static from(frm) {
-        return Object.assign(new FormDataStore, frm);
+        return Object.assign(new FormDataStore(), frm);
     }
 
     static initFromEnv(){
         let form = document.getElementById("purchaseForm");
-        let sFrm = new FormDataStore;
+        let sFrm = new FormDataStore();
         sFrm.firstName = form.elements["firstName"].value;
         sFrm.lastName = form.elements["lastName"].value;
         sFrm.address = form.elements["address"].value;
@@ -377,10 +377,6 @@ class FormDataStore {
         sFrm.email = form.elements["email"].value;
         sFrm.phone = form.elements["phone"].value;
         return sFrm;
-    }
-
-    toJSON(){
-        return JSON.stringify(this);
     }
 }
 
@@ -397,15 +393,14 @@ class PageData {
         let dat = Object.assign(new PageData, JSON.parse(data));
 
         try{
-            dat.cart = Cart.from(JSON.parse(dat.cart));
+            dat.cart = Cart.from(dat.cart);
         } catch (err) {
             console.log(err);
             dat.cart = null;
         }
         try {
-            dat.form = FormDataStore.from(JSON.parse(dat.form));
+            dat.form = FormDataStore.from(dat.form);
         } catch (err) {
-            dat.form = null;
             console.log(err);
             console.log("Created new FormDataStore")
             dat.form = new FormDataStore();
@@ -417,10 +412,6 @@ class PageData {
         }
 
         return dat;
-    }
-
-    toJSON(){
-        return JSON.stringify(this);
     }
 }
 
@@ -452,8 +443,8 @@ function bake_cookie(value) {
 // window.onbeforeunload = () => { bake_cookie(cart); };
 
 let pageData = PageData.from(document.cookie);
-let cart = PageData.cart;
+let cart = pageData.cart;
 
 window.onbeforeunload = () => {
-    document.cookie = pageData.toJSON();
+    document.cookie = JSON.stringify(pageData);
 };
