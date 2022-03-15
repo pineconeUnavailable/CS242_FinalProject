@@ -1,20 +1,3 @@
-// function getCart(cartJSON) {
-//     try { //deserialize existing cart
-//         let obj = JSON.parse(cartJSON);
-//         if (obj == null) {
-//             console.log("Unable to Parse Cart\nCreated new cart");
-//             return new Cart;
-//         }
-//         console.log("Loaded existing cart");
-
-//         return Cart.from(obj);
-//     } catch (error) { //new cart
-//         console.log(error);
-//         console.log("Created new cart");
-//         return new Cart;
-//     }
-// }
-
 var assignID = (function () {
     let i = 1;
 
@@ -51,10 +34,23 @@ class Item {
         let node = document.createElement("li").appendChild(document.createElement("div"));
         let btn = document.createElement("button");
         // ----------- Close Button -----------//
-        btn.onclick = () => { cart.removeGuiItem(document.getElementById("cartItems"), this.itemInstId) };
-        btn.appendChild(document.createTextNode("X"));
-        btn.classList.add("close");
-        node.appendChild(btn);
+        let addCloseBtn = () =>{
+            btn.onclick = () => { cart.removeGuiItem(document.getElementById("cartItems"), this.itemInstId) };
+            btn.appendChild(document.createTextNode("X"));
+            btn.classList.add("close");
+            node.appendChild(btn);
+        };
+        
+        try {
+            if(orderSummary == "summary") {
+                console.log(this);
+                this.imageShown = true;
+                console.log("h");
+            } else {
+                addCloseBtn();
+            }
+        } catch {addCloseBtn();}
+        
 
         // ----------- Name and Unit Cost -----------//
         node = this.renderBase(node);
@@ -67,33 +63,44 @@ class Item {
             node.appendChild(document.createElement("br"));
             let img = document.createElement("img");
             img.src = this.imageUrl;
-            img.style.height = "auto";
+            img.style.width = "50%";
             img.style.marginLeft = "auto";
             img.style.marginRight = "auto";
-            img.style.width = "80%";
-            img.style.display = "block";
+            img.style.height = "5%";
+            //img.style.display = "block";
+            img.style.objectFit ="contain";
 
             node.appendChild(img);
             this.imageUrl = undefined;
         }
 
         // ----------- Quantity Increment / Decrement -----------//
-        
+        let addIncDec = ()=>{
+            let btnLess = document.createElement("button");
+            btnLess.onclick = () =>{this.changeAmt(-1);};
+            btnLess.appendChild(document.createTextNode("<"));
+            btnLess.classList.add("change");
+            node.appendChild(btnLess);
+            let btnMore = document.createElement("button");
+            btnMore.onclick = () =>{this.changeAmt(1);};
+            btnMore.appendChild(document.createTextNode(">"));
+            btnMore.classList.add("change");
+            node.appendChild(btnMore);
+        }
 
-        let btnLess = document.createElement("button");
-        btnLess.onclick = () =>{this.changeAmt(-1);};
-        btnLess.appendChild(document.createTextNode("<"));
-        btnLess.classList.add("change");
-        node.appendChild(btnLess);
-        let btnMore = document.createElement("button");
-        btnMore.onclick = () =>{this.changeAmt(1);};
-        btnMore.appendChild(document.createTextNode(">"));
-        btnMore.classList.add("change");
-        node.appendChild(btnMore);
+        try {
+            if(orderSummary != "summary") {
+                addIncDec();
+            }
+        } catch {
+            addIncDec();
+        }
+
+        
 
         // ----------- Options Selection -----------//
         try {
-            if(orderSummary == true) {
+            if(orderSummary == "partial") {
                 node.appendChild(document.createElement("br")); //newline
                 let div = document.createElement("div");//shipping div
 
@@ -135,6 +142,9 @@ class Item {
                 }
 
                 node.appendChild(div);
+            } else {
+                node.appendChild(document.createElement("br"));
+                node.appendChild(document.createTextNode("Arriving in a " + this.shipping));
             }
         } catch {}
 

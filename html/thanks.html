@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--        Page Metadata       -->
+    <meta charset="UTF-8">
+    <meta name="author" content="Christen Spadavecchia">
+    <meta name="keywords" content="Store, Online, Retail, Buy, Purchase, Christen, Spadavecchia, Web Developer">
+    <meta name="description" content="Online Storefront">
+    <meta name="robots" content="none">
+
+    <!--        Page Rendering      -->
+    <title>The Corner Store</title> <!-- Page Title -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set Viewport -->
+    <script>
+        let orderSummary = "summary";
+    </script>
+    <script src="../js/CartManager.js"></script> <!-- Load Cart -->
+    <link rel="stylesheet" href="../css/global.css">
+    </link> <!-- Global Stylesheet Link -->
+    <link rel="stylesheet" href="../css//nav.css">
+    </link> <!-- Nav Stylesheet Link -->
+</head>
+
+<body>
+    <canvas id="bg" style="z-index: -1; position:fixed; margin:0; padding: 0; width: 100%; height: 100%;">
+        Your browser does not support the canvas element.
+    </canvas>
+
+    <div  class="flexX growY" id="content">
+        <article style="width: 100%;" class="scrollY">
+
+            <nav class="flexX container">
+                <a class="nav_link nav_title mono" href="../html/index.html">The Corner Store</a>
+                <a class="nav_link mono" href="../html/browse.html">Browse</a>
+                <a class="nav_link mono" href="../html/order.html">Order</a>
+            </nav>
+
+            <h1 class="text centerX">Thank you for your feedback!</h1>
+            <h4 class="text centerX">Feedback sent sucesssfully</h4>
+            <a style="text-decoration:none;" href="../html/index.html">
+                <button class="confirm">Back to main area.</button>
+            </a>
+
+            <footer class="bottom">
+                <div>
+                    <nav class="flexX container bottom">
+                        <a class="nav_link mono" href="../html/about.html">About</a>
+                        <a class="nav_link mono" href="../html/contact.html">Contact</a>
+                    </nav>
+                </div>
+            </footer>
+        </article>
+    </div>
+
+
+
+    <script src="../js/global.js"></script>
+    <script src="../js/StockManager.js"></script> <!-- Load Inventory -->
+    <script src="../js/resize.js"></script> <!-- Handle Scaling Sidebar Intelligently -->
+    <script src="../js/bg.js"></script>
+</body>
+
+</html>

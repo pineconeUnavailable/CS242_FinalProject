@@ -1,7 +1,7 @@
 $.validator.setDefaults({
     submitHandler: function () {
         pageData.form = FormDataStore.initFromEnv();
-        window.location.href = 
+        window.location.href = "../html/summary.html";
     }
 });
 

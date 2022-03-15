@@ -18,8 +18,10 @@
     </link> <!-- Nav Stylesheet Link -->
 
     <!--        Form Validation      -->
-    <script src="../js/lib/jquery-3.2.1.min.js"></script>
-    <script src="../js/lib/jquery.validate.js"></script>
+    <script src="../js/lib/jquery-3.2.1.min.js"></script> <!-- JQuery -->
+    <script type="text/javascript" src="../js/lib/jquery.validate.js"></script><!-- JQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script> <!-- More validators -->
+    <script src="../js/validateFeedback.js"></script> <!-- Feedback Validator -->>
     
 </head>
 
@@ -38,7 +40,7 @@
             </nav>
 
             <h1 class="text centerX">Get In Touch!</h1>
-            <form class="mono centerX" style="width: 30%;" name="FeedbackForm" action="thanks.html" onsubmit="validate()">
+            <form class="mono centerX" style="width: 30%;" name="feedbackForm" id="feedbackForm">
                 First Name:&nbsp;&nbsp;&nbsp;
                 <input type="text" name="firstName" class="dynamic-txt" size="20" />
                 <br>

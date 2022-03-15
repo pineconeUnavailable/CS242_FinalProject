@@ -224,8 +224,3 @@ button.change:hover{
 #stock{
     padding: 80px;
 }
-
-#stock > li {
-    height: 5%;
-    width: 5%;
-}

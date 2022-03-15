@@ -12,15 +12,17 @@ function getIfMobile() {
 let ifMobile = getIfMobile();
 
 let resizeHandler = () => {
-    if (ifMobile || window.innerHeight < 600) {
-        content.classList.remove("flexX");
-        article.classList.remove("scrollY");
-        aside.classList.remove("scrollY");
-    } else {
-        content.classList.add("flexX");
-        article.classList.add("scrollY");
-        aside.classList.add("scrollY");
-    }
+    try {
+        if (ifMobile || window.innerHeight < 600) {
+            content.classList.remove("flexX");
+            article.classList.remove("scrollY");
+            aside.classList.remove("scrollY");
+        } else {
+            content.classList.add("flexX");
+            article.classList.add("scrollY");
+            aside.classList.add("scrollY");
+        }
+    } catch {}
 };
 
 resizeHandler();
