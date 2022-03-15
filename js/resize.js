@@ -22,7 +22,7 @@ let resizeHandler = () => {
             article.classList.add("scrollY");
             aside.classList.add("scrollY");
         }
-    } catch {}
+    } catch { }
 };
 
 resizeHandler();

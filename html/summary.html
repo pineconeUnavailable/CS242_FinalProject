@@ -27,7 +27,7 @@
         Your browser does not support the canvas element.
     </canvas>
 
-    <div  class="flexX growY" id="content">
+    <div class="flexX growY" id="content">
         <article style="width: 100%;" class="scrollY">
 
             <nav class="flexX container">
@@ -63,7 +63,7 @@
     <script>
         let gTotal = document.getElementById("total");
 
-        if(pageData.cart.items.length > 0){
+        if (pageData.cart.items.length > 0) {
             var formatter = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'USD',
@@ -73,9 +73,9 @@
             let tax = subTotal * 0.1;
             gTotal.textContent = "Total: " + formatter.format(Number(subTotal + tax)) + " (" + formatter.format(Number(tax)) + " tax)";
 
-            
 
-            let appendLine = (node, text)=>{
+
+            let appendLine = (node, text) => {
                 details.appendChild(document.createTextNode(text));
                 details.appendChild(document.createElement("br"));
             }
@@ -102,13 +102,13 @@
             pageData.cart.items.length = 0;
             pageData.form = new FormDataStore();
 
-            let updateTimer = ()=>{
+            let updateTimer = () => {
                 let remaining = (date - Date.now()) / 1000;
-                let days = Math.floor(remaining/86400);
+                let days = Math.floor(remaining / 86400);
                 remaining -= days * 86400;
-                let hours = Math.floor(remaining/3600) % 24;
+                let hours = Math.floor(remaining / 3600) % 24;
                 remaining -= hours * 3600;
-                let minutes = Math.floor(remaining/60) % 60;
+                let minutes = Math.floor(remaining / 60) % 60;
                 remaining = Math.floor(remaining - (minutes * 60));
                 clockDisplay.textContent = days + " Days " + hours + " Hours " + minutes + " Minutes " + remaining + " seconds. ";
             };

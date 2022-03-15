@@ -9,13 +9,13 @@ var assignID = (function () {
 class Item {
     constructor(itemID, itemName, unitCost, quantity, imageUrl) {
         this.itemInstId = assignID();
-        if(itemID != null){
+        if (itemID != null) {
             this.itemID = itemID;
             this.itemName = itemName;
             this.unitCost = unitCost;
             this.quantity = quantity;
             this.imageUrl = imageUrl;
-            
+
         } else {
             this.itemID = "NULL_ITEM";
             this.itemName = "NULL ITEM";
@@ -34,21 +34,21 @@ class Item {
         let node = document.createElement("li").appendChild(document.createElement("div"));
         let btn = document.createElement("button");
         // ----------- Close Button -----------//
-        let addCloseBtn = () =>{
+        let addCloseBtn = () => {
             btn.onclick = () => { cart.removeGuiItem(document.getElementById("cartItems"), this.itemInstId) };
             btn.appendChild(document.createTextNode("X"));
             btn.classList.add("close");
             node.appendChild(btn);
         };
-        
+
         try {
-            if(orderSummary == "summary") {
+            if (orderSummary == "summary") {
                 this.imageShown = true;
             } else {
                 addCloseBtn();
             }
-        } catch {addCloseBtn();}
-        
+        } catch { addCloseBtn(); }
+
 
         // ----------- Name and Unit Cost -----------//
         node = this.renderBase(node);
@@ -57,7 +57,7 @@ class Item {
         node.appendChild(document.createTextNode(" "));
 
         // ----------- Display & Toggle Image -----------//
-        if(this.imageUrl != undefined && this.imageShown == true){
+        if (this.imageUrl != undefined && this.imageShown == true) {
             node.appendChild(document.createElement("br"));
             let img = document.createElement("img");
             img.src = this.imageUrl;
@@ -66,38 +66,38 @@ class Item {
             img.style.marginRight = "auto";
             img.style.height = "5%";
             //img.style.display = "block";
-            img.style.objectFit ="contain";
+            img.style.objectFit = "contain";
 
             node.appendChild(img);
         }
 
         // ----------- Quantity Increment / Decrement -----------//
-        let addIncDec = ()=>{
+        let addIncDec = () => {
             let btnLess = document.createElement("button");
-            btnLess.onclick = () =>{this.changeAmt(-1);};
+            btnLess.onclick = () => { this.changeAmt(-1); };
             btnLess.appendChild(document.createTextNode("<"));
             btnLess.classList.add("change");
             node.appendChild(btnLess);
             let btnMore = document.createElement("button");
-            btnMore.onclick = () =>{this.changeAmt(1);};
+            btnMore.onclick = () => { this.changeAmt(1); };
             btnMore.appendChild(document.createTextNode(">"));
             btnMore.classList.add("change");
             node.appendChild(btnMore);
         }
 
         try {
-            if(orderSummary != "summary") {
+            if (orderSummary != "summary") {
                 addIncDec();
             }
         } catch {
             addIncDec();
         }
 
-        
+
 
         // ----------- Options Selection -----------//
         try {
-            if(orderSummary == "partial") {
+            if (orderSummary == "partial") {
                 node.appendChild(document.createElement("br")); //newline
                 let div = document.createElement("div");//shipping div
 
@@ -105,17 +105,17 @@ class Item {
                 let btnRad0 = document.createElement("input");
                 btnRad0.type = "radio";
                 btnRad0.name = this.itemID;
-                btnRad0.oninput = () =>{
+                btnRad0.oninput = () => {
                     this.shipping = "Box";
                     updateFunc();
                 }
-                
+
                 div.appendChild(document.createTextNode("Ship in: "));
                 div.appendChild(document.createTextNode(" "));
                 div.appendChild(btnRad0);
                 div.appendChild(document.createTextNode("Box "));
                 div.appendChild(document.createTextNode(" "));
-                
+
                 //button 1
                 let btnRad1 = document.createElement("input");
                 btnRad1.type = "radio";
@@ -124,14 +124,14 @@ class Item {
                     this.shipping = "Crate";
                     updateFunc();
                 };
-                
+
 
                 div.appendChild(btnRad1);
                 div.appendChild(document.createTextNode("Crate [+$10]"));
                 div.classList.add("centerX");
                 div.appendChild(document.createTextNode(" "));
 
-                if(this.shipping == "Crate"){
+                if (this.shipping == "Crate") {
                     btnRad1.checked = true;
                 } else {
                     btnRad0.checked = true;
@@ -143,28 +143,28 @@ class Item {
                 node.appendChild(document.createElement("br"));
                 node.appendChild(document.createTextNode("Arriving in a " + this.shipping));
             }
-        } catch {}
+        } catch { }
 
         return node;
     }
 
-    changeAmt(increment){
+    changeAmt(increment) {
         console.log(this);
-        if(this.quantity + increment > 0){
+        if (this.quantity + increment > 0) {
             let maxQ = 0;
             stock.forEach((elem, i) => {
-                if(this.itemID == stock[i].itemID){
+                if (this.itemID == stock[i].itemID) {
                     maxQ = elem.quantity;
                 }
             });
-            if(maxQ >= this.quantity + increment){
+            if (maxQ >= this.quantity + increment) {
                 this.quantity += increment;
             }
         }
         cart.renderTo(document.getElementById("cartItems"));
     };
 
-    renderBase(node){
+    renderBase(node) {
         node.appendChild(document.createTextNode(this.itemName));
         node.appendChild(document.createElement("br"));
         node.appendChild(document.createTextNode("$"));
@@ -184,23 +184,23 @@ class DisplayItem extends Item {
         this.isDisplay = true;
     }
 
-    render(){
+    render() {
         let node = document.createElement("li").appendChild(document.createElement("div"));
         let btn = document.createElement("button");
-        
+
         node.appendChild(document.createElement("Available:"));
         btn.onclick = () => {
-            if(this instanceof DisplayItem){
+            if (this instanceof DisplayItem) {
                 let existing = null;
                 cart.items.forEach(elem => {
-                    if(this.itemID == elem.itemID){
+                    if (this.itemID == elem.itemID) {
                         elem.changeAmt(1);
                         cart.renderTo(document.getElementById("cartItems"));
                         existing = elem;
                     }
                 });
 
-                if(existing == null){
+                if (existing == null) {
                     let cpy = Object.create(new Item);
                     cpy.unitCost = this.unitCost;
                     cpy.quantity = 1;
@@ -218,9 +218,9 @@ class DisplayItem extends Item {
         btn.onclick.bind(this);
 
         node.onclick = (event) => {
-            if(!(event.target instanceof HTMLButtonElement)){
+            if (!(event.target instanceof HTMLButtonElement)) {
                 this.imageShown = !this.imageShown;
-                if(this.imageShown){
+                if (this.imageShown) {
                     let img = document.createElement("img");
                     img.src = this.imageUrl;
                     img.style.height = "auto";
@@ -229,14 +229,14 @@ class DisplayItem extends Item {
                     img.style.width = "80%";
                     img.style.display = "block";
                     node.appendChild(img);
-                    node.childNodes.forEach(subNode =>{
-                        if(subNode instanceof Text && subNode.textContent == "[Click To View]"){
+                    node.childNodes.forEach(subNode => {
+                        if (subNode instanceof Text && subNode.textContent == "[Click To View]") {
                             subNode.remove();
                         }
                     });
                 } else {
-                    node.childNodes.forEach(subNode =>{
-                        if(subNode instanceof HTMLImageElement){
+                    node.childNodes.forEach(subNode => {
+                        if (subNode instanceof HTMLImageElement) {
                             subNode.remove();
                         }
                     });
@@ -255,10 +255,10 @@ class DisplayItem extends Item {
         node.appendChild(document.createElement("br"));
 
         node.appendChild(document.createTextNode("[Click To View]"));
-        
+
         return node;
     }
-    
+
 }
 
 class Cart {
@@ -282,16 +282,16 @@ class Cart {
             newElem.appendChild(item.render());
             element.appendChild(newElem);
         });
-        try{
+        try {
             updateFunc();
-        } catch {}
+        } catch { }
     }
 
     getItems() {
         return items;
     }
 
-    addGuiItem(node, item){
+    addGuiItem(node, item) {
         this.addItem(item);
         this.renderTo(node);
     }
@@ -306,7 +306,7 @@ class Cart {
         this.renderTo(node);
     }
 
-    
+
     removeItem(itemInstID) {
         this.items.forEach((element, i, arr) => {
             if (element.itemInstId == itemInstID) {
@@ -315,27 +315,27 @@ class Cart {
         });
     }
 
-    clearGui(node){
+    clearGui(node) {
         node.innerHTML = "";
         this.clear();
     }
 
-    clear(){
+    clear() {
         this.items.clear();
     }
 
-    getTotal(){
+    getTotal() {
         let total = 0;
         this.items.forEach(item => {
             total += item.unitCost * item.quantity;
-            if(item.shipping == "Crate"){
+            if (item.shipping == "Crate") {
                 total += 10;
             }
         });
         return total;
     }
 
-    getItemList(){
+    getItemList() {
         let itemList = document.createElement("p");
         this.items.forEach(item => {
             itemList.appendChild(document.createTextNode(item.itemName + " x" + item.quantity));
@@ -366,12 +366,12 @@ class FormDataStore {
         this.email = "";
         this.phone = "";
     }
-    
+
     static from(frm) {
         return Object.assign(new FormDataStore(), frm);
     }
 
-    static initFromEnv(){
+    static initFromEnv() {
         let form = document.getElementById("purchaseForm");
         let sFrm = new FormDataStore();
         sFrm.firstName = form.elements["firstName"].value;
@@ -391,7 +391,7 @@ class FormDataStore {
 
 
 class PageData {
-    constructor(){
+    constructor() {
         this.cart = null;
         this.form = null;
     }
@@ -399,7 +399,7 @@ class PageData {
     static from(data) {
         let dat = Object.assign(new PageData, JSON.parse(data));
 
-        try{
+        try {
             dat.cart = Cart.from(dat.cart);
         } catch (err) {
             console.log(err);
@@ -413,7 +413,7 @@ class PageData {
             dat.form = new FormDataStore();
         }
 
-        if(dat.cart == null){
+        if (dat.cart == null) {
             console.log("Created new cart")
             dat.cart = new Cart();
         }

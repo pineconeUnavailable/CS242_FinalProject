@@ -22,7 +22,8 @@
     </link> <!-- Nav Stylesheet Link -->
     <script src="../js/lib/jquery-3.2.1.min.js"></script> <!-- JQuery -->
     <script type="text/javascript" src="../js/lib/jquery.validate.js"></script><!-- JQuery Validate -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script> <!-- More validators -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+    <!-- More validators -->
     <script src="../js/validatePurchase.js"></script> <!-- Purchase Validator -->
 </head>
 
@@ -41,7 +42,7 @@
             </nav>
 
             <h1 class="text centerX">Checkout</h1>
-            
+
             <form id="purchaseForm" class="mono" style="width: 100%;" name="purchaseForm" action="summary.html">
                 <div>
                     <div style="display: contents;">
@@ -134,7 +135,7 @@
         let updateFunc = () => {
             gList.innerHTML = "";
             gList.appendChild(cart.getItemList());
-            
+
             let subTotal = Number(cart.getTotal());
             let tax = subTotal * 0.1;
             gSubTotal.textContent = "Subtotal: " + formatter.format(subTotal);

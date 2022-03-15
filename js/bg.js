@@ -102,7 +102,7 @@ class Simulation {
     }
 
     resize_window() {
-        if(Math.abs(this.aspectRatio - (window.innerWidth/window.innerHeight)) > 0.2){
+        if (Math.abs(this.aspectRatio - (window.innerWidth / window.innerHeight)) > 0.2) {
             width = window.innerWidth * SCALE_FACTOR;
             height = window.innerHeight * SCALE_FACTOR;
             drawCtx.canvas.width = width;
@@ -111,19 +111,19 @@ class Simulation {
             sim.points.forEach((point, index) => {
                 if (point.x < POINT_RADIUS || point.x > width - POINT_RADIUS ||
                     point.y < POINT_RADIUS || point.y > height - POINT_RADIUS) {
-    
-    
+
+
                     let point = new Point(
                         rand(POINT_RADIUS * 2, width - POINT_RADIUS * 2),
                         rand(POINT_RADIUS * 2, height - POINT_RADIUS * 2),
                         rand(-5, 5),
                         rand(-5, 5)
                     );
-    
+
                     this.points[index] = point;
                 }
             });
-            this.aspectRatio = width/(height);
+            this.aspectRatio = width / (height);
         }
     }
 }
@@ -177,22 +177,22 @@ async function draw() {
         let start = new Date().getTime();
 
         //clear last frame
-        drawCtx.fillStyle = BG_FILL; 
+        drawCtx.fillStyle = BG_FILL;
         drawCtx.fillRect(0, 0, width, height);
         //update and render
         sim.update();
         sim.render();
 
-        if(drawSlingshot){
+        if (drawSlingshot) {
             line(startPos.x, startPos.y, currentPos.x, currentPos.y);
         }
 
         //wait to render next frame
         let end = new Date().getTime();
         let time = end - start;
-        if(time > MAX_FRAME_WAIT * 0.8 && sim.points.length > POINTS) {
+        if (time > MAX_FRAME_WAIT * 0.8 && sim.points.length > POINTS) {
             console.log("bg: Culling points to increase fps.");
-            for(let i = 0; i < 5 + sim.points.length/4; i++){
+            for (let i = 0; i < 5 + sim.points.length / 4; i++) {
                 let cull_index = rand(0, sim.points.length);
                 sim.points.splice(cull_index, 1);
             }
@@ -210,7 +210,7 @@ window.addEventListener('resize', function (event) {
 }, true);
 
 let lastHovered = null;
-document.addEventListener('mouseover', function(event) {
+document.addEventListener('mouseover', function (event) {
     lastHovered = event.target;
 });
 
@@ -220,9 +220,9 @@ document.addEventListener('mousemove', function (event) {
 });
 
 document.addEventListener('mousedown', function (event) {
-    if(lastHovered == document.getElementsByTagName("article")[0]){
+    if (lastHovered == document.getElementsByTagName("article")[0]) {
         startPos.x = event.clientX * SCALE_FACTOR;
-        startPos.y = event.clientY * SCALE_FACTOR; 
+        startPos.y = event.clientY * SCALE_FACTOR;
         drawSlingshot = true;
     } else {
         drawSlingshot = false;
@@ -232,29 +232,29 @@ document.addEventListener('mousedown', function (event) {
 
 document.addEventListener('mouseup', function (event) {
     //suppress slingshot feature when selecting text
-    if(window.getSelection().toString() != "") {
+    if (window.getSelection().toString() != "") {
         drawSlingshot = false;
         return;
     }
     //suppress slingshot feature when not in main area
-    if(lastHovered != document.getElementsByTagName("article")[0]){
+    if (lastHovered != document.getElementsByTagName("article")[0]) {
         drawSlingshot = false;
         return;
     }
-    
 
 
-    if(!drawSlingshot){
+
+    if (!drawSlingshot) {
         startPos.x = event.clientX;
         startPos.y = event.clientY;
     }
 
     let point = new Point(
-        startPos.x, startPos.y, 
-        scale(currentPos.x - startPos.x, -width/2, width/2, -SLING_VELO_MAX, SLING_VELO_MAX),
-        scale(currentPos.y - startPos.y, -height/2, height/2, -SLING_VELO_MAX * height/width, SLING_VELO_MAX * height/width));
+        startPos.x, startPos.y,
+        scale(currentPos.x - startPos.x, -width / 2, width / 2, -SLING_VELO_MAX, SLING_VELO_MAX),
+        scale(currentPos.y - startPos.y, -height / 2, height / 2, -SLING_VELO_MAX * height / width, SLING_VELO_MAX * height / width));
 
     sim.points.push(point);
-    
+
     drawSlingshot = false;
 });

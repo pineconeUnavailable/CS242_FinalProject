@@ -24,16 +24,16 @@
         Your browser does not support the canvas element.
     </canvas>
 
-    
+
     <div class="flexX growY" id="content">
-        
+
         <article class="scrollY">
             <nav class="flexX container" style="width: 100%;">
                 <a class="nav_link nav_title mono" href="../html/index.html">The Corner Store</a>
                 <a class="nav_link mono" href="../html/browse.html">Browse</a>
                 <a class="nav_link mono" href="../html/order.html">Order</a>
             </nav>
-            
+
 
             <h1 class="text centerX">All Items</h1>
             <div class="scrollY">
@@ -73,8 +73,8 @@
             stockDisplay.appendChild(item.render());
         });
 
-        let showNextBtn = ()=>{
-            if(cart.items.length > 0){
+        let showNextBtn = () => {
+            if (cart.items.length > 0) {
                 toOrder.style.display = "block";
             } else {
                 toOrder.style.display = "none";

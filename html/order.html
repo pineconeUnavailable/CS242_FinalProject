@@ -68,8 +68,8 @@
     <script src="../js/global.js"></script>
     <script src="../js/StockManager.js"></script> <!-- Load Inventory -->
     <script>
-        function validateOrder(){
-            if(cart.items.length > 0){
+        function validateOrder() {
+            if (cart.items.length > 0) {
                 window.location.href = "../html/checkout.html";
             } else {
                 alert("Please add something to your cart from the Browse section before you check out!");
@@ -90,7 +90,7 @@
         let updateFunc = () => {
             gList.innerHTML = "";
             gList.appendChild(cart.getItemList());
-            
+
             let subTotal = Number(cart.getTotal());
             let tax = subTotal * 0.1;
             gSubTotal.textContent = "Subtotal: " + formatter.format(subTotal);
