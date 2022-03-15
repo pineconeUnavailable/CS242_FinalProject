@@ -43,9 +43,7 @@ class Item {
         
         try {
             if(orderSummary == "summary") {
-                console.log(this);
                 this.imageShown = true;
-                console.log("h");
             } else {
                 addCloseBtn();
             }

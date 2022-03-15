@@ -38,6 +38,7 @@
 
             <h1 class="text centerX">Order Summary</h1>
             <h3 id="itemDate" class="text centerX"></h3>
+            <p id="details" class="text centerX"></p>
             <ul style="width: 50%;" class="centerX" id="cartItems"></ul>
             <h3 id="total" class="text centerX"></h3>
             <a style="text-decoration:none;" href="../html/index.html">
@@ -72,7 +73,27 @@
             let tax = subTotal * 0.1;
             gTotal.textContent = "Total: " + formatter.format(Number(subTotal + tax)) + " (" + formatter.format(Number(tax)) + " tax)";
 
+            
+
+            let appendLine = (node, text)=>{
+                details.appendChild(document.createTextNode(text));
+                details.appendChild(document.createElement("br"));
+            }
+
+            let details = document.getElementById("details");
+            let info = pageData.form;
+            appendLine(details, "Delivering Order To:");
+            appendLine(details, info.firstName + " " + info.lastName);
+            appendLine(details, info.address + " " + info.aptNum);
+            appendLine(details, info.city + ", " + info.state + " " + info.zipcode);
+            appendLine(details, info.email);
+            appendLine(details, info.phone);
+            appendLine(details, " ");
+            appendLine(details, " Items: ");
+
+            //Clear cookies to mitigate security risks
             pageData.cart.items.length = 0;
+            pageData.form = new FormDataStore();
         } else {
             gTotal.textContent = "nothing to see here!";
         }
