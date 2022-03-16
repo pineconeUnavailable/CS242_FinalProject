@@ -63,7 +63,7 @@
     <script>
         let gTotal = document.getElementById("total");
 
-        if (pageData.cart.items.length > 0) {
+        if (pageData.cart.items.length > 0 && pageData.form.firstName != "") {
             var formatter = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'USD',
@@ -116,6 +116,11 @@
 
         } else {
             gTotal.textContent = "nothing to see here!";
+            document.getElementById("cartItems").innerHTML = "";
+
+            pageData.cart.items.forEach(item => {
+                item.imageShown = false;
+            });
         }
     </script>
     <script src="../js/resize.js"></script> <!-- Handle Scaling Sidebar Intelligently -->
