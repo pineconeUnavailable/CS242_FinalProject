@@ -93,7 +93,7 @@
             appendLine(details, info.email);
             appendLine(details, info.phone);
             appendLine(details, " ");
-            appendLine(details, "Estimated Delivery Date: " + date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear());
+            appendLine(details, "Estimated Delivery Date: " + Number(date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
             details.appendChild(clockDisplay);
             appendLine(details, " ");
             appendLine(details, " Items: ");
