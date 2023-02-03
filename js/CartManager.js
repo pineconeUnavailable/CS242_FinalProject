@@ -397,28 +397,34 @@ class PageData {
     }
 
     static from(data) {
-        let dat = Object.assign(new PageData, JSON.parse(data));
+        let init = (dat) => {
+            try {
+                dat.cart = Cart.from(dat.cart);
+            } catch (err) {
+                console.log(err);
+            }
+            try {
+                dat.form = FormDataStore.from(dat.form);
+            } catch (err) {
+                console.log(err);
+                console.log("Created new FormDataStore")
+                dat.form = new FormDataStore();
+            }
+    
+            if (dat.cart == null || dat.cart == undefined) {
+                console.log("Created new cart")
+                dat.cart = new Cart();
+            }
+            return dat;
+        }
 
         try {
-            dat.cart = Cart.from(dat.cart);
+            let dat = Object.assign(new PageData, JSON.parse(data));
+            return init(dat);
         } catch (err) {
-            console.log(err);
-            dat.cart = null;
+            let dat = new PageData;
+            return init(dat);
         }
-        try {
-            dat.form = FormDataStore.from(dat.form);
-        } catch (err) {
-            console.log(err);
-            console.log("Created new FormDataStore")
-            dat.form = new FormDataStore();
-        }
-
-        if (dat.cart == null) {
-            console.log("Created new cart")
-            dat.cart = new Cart();
-        }
-
-        return dat;
     }
 }
 
@@ -431,13 +437,13 @@ class PageData {
 function read_cookie(name) {
     // var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
     // result && (result = JSON.parse(result[1]));
-    result = document.cookie;
+    result = decodeURIComponent(document.cookie);
     return result;
 }
 
 function bake_cookie(value) {
     // let cookie = [name, '=', JSON.stringify(value), '; domain=.', window.location.host.toString(), '; path=/;'].join('');
-    let cookie = JSON.stringify(value);
+    let cookie = decodeURIComponent(JSON.stringify(value));
     document.cookie = cookie;
 }
 /*--------------------------------------------------*/
@@ -449,9 +455,9 @@ function bake_cookie(value) {
 // var cart = getCart(read_cookie("CartData"));
 // window.onbeforeunload = () => { bake_cookie(cart); };
 
-let pageData = PageData.from(document.cookie);
+let pageData = PageData.from(read_cookie());
 let cart = pageData.cart;
 
 window.onbeforeunload = () => {
-    document.cookie = JSON.stringify(pageData);
+    document.cookie = encodeURIComponent(JSON.stringify(pageData));
 };
